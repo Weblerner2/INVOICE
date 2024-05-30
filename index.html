@@ -15,7 +15,7 @@
         margin: 0;
         padding: 20px;
         background-color: #f4f4f4;
-		
+		margin-left:10px;
     }
     .invoice {
         max-width: 800px;
@@ -29,6 +29,7 @@
     table {
         width: 100%;
         border-collapse: collapse;
+		table-layout:fixed;
     }
     th, td {
         border: 1px solid #ccc;
@@ -87,7 +88,7 @@
 		}
 		#btn{
 		 	margin-top:25px;
-			margin-left:420px;
+			margin-left:50%;
 			border-radius:7px;
 			height:40px;
 			width:40px;
@@ -95,7 +96,7 @@
 			cursor: pointer;
 			background-color: #007bff;
 			color: #fff;
-			
+			table-layout:auto;
        
        
 		}
@@ -235,28 +236,90 @@
 				.media-icons a:nth-child(4):hover{
 				  color:var(--youtube);
 				}
+				
+				@media screen and (max-width: 400px){
+				body{
 					
+					<!-- flex-direction: column; -->
+					text-align:left;
+					width:100%;
+					
+					height:60%;
+					
+					table-layout:auto;
+					 cursor: pointer;
+					font-size:15px;
+					}
 				
 				
+				#btn{
+					margin-left:25%;
+				}
+				.mainbox{
+					margin-top:50px;
+				}
+		}		
+			@media screen and (max-width: 550px){
+				#btn{
+					margin-left:25%;
+					table-layout:auto;
+				}
+					body{
+				justify-content:center;
+				width:90%;
+			}
+			.mainbox{
+				margin-top:25%;
+			}
+			
+			}	
+			@media screen and (max-width: 380px){
+				#btn{
+				margin-left:-7%;
+				table-layout:auto;
+				font-size:12px;
+				}
+				#cms{
+					gap:2px;
+					
+					display:flex;
+					justify-content:left;
+					max-width:18%;
+					table-layout:auto;
+					
+				}
+			
+			#cg{
+				display:inline-block;
+				table-layout:auto;
 				
-				
-				
+			}
+			.mainbox{
+				margin-top:60%;
+			}
+			body{
+				justify-content:center;
+				width:90%;
+				font-size:18px;
+				margin-left:-10px;
+			}
+			}	
+			
 </style>
 </head>
 <body id="body">
 <div class="invoice">
 	<div style="display:flex;gap:10px;">
    <img src="https://i.ibb.co/X2h2NCp/images.png" style="height:75px;width:75px;">
-   
+ 
 	<h2 id="cg" style="margin-top:25px;">Advanced Invoice</h2>
-
 	<button title="Edit the invoice" id="btn">
      	<span class="material-symbols-outlined">edit</span>
 	</button>
 	
 	</div>
 	<div id="contentToPrint">
-	<div id="edit">
+	<div id="edit"><br>
     <p>Invoice Number: #INV2024001</p>
     <p>Date: May 28, 2024</p>
     <table id="myTable">
@@ -269,14 +332,14 @@
         <tr>
             <td>Product A</td>
             <td>2</td>
-            <td>$50.00</td>
-            <td>$100.00</td>
+            <td>$50</td>
+            <td>$100</td>
         </tr>
         <tr>
             <td>Product B</td>
             <td>1</td>
-            <td>$75.00</td>
-            <td>$75.00</td>
+            <td>$75</td>
+            <td>$75</td>
         </tr>
     </table><br>
 	</div>
@@ -304,15 +367,17 @@
 			 <!-- <span class="material-symbols-outlined">download_done</span> -->
 	
 		
-		
+	<div id="cms">	
 	<button id="save">
 	<!-- <i class="fa fa-spinner fa-spin"></i> -->
 	SAVE 
 	</button>
+	
 	<button id="addButton">r+</button>
 	<button id="removeButton">r-</button>
 	<button id="addColumnButton">c+</button>
 	<button id="removeColumnButton">c-</button>
+	</div>
 	</div>
 </div>
 
@@ -321,6 +386,11 @@
 	let btn=document.getElementById('btn');
 	let edit=document.getElementById('edit');
 	let save=document.getElementById('save');
+	
+		body.addEventListener('selectstart',(e)=>{
+			e.preventDefault();
+		});
+	
 	$(document).ready(function(){
 		$("#save").hide();
 		$("#addButton").hide();
