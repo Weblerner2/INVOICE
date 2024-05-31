@@ -15,7 +15,7 @@
         margin: 0;
         padding: 20px;
         background-color: #f4f4f4;
-		margin-left:10px;
+		
     }
     .invoice {
         max-width: 800px;
@@ -30,11 +30,25 @@
         width: 100%;
         border-collapse: collapse;
 		table-layout:fixed;
+		border-spacing: 0;
+		border: 1px solid #ddd;
+		position:relative;
     }
+	
+	.container{
+		overflow-x:auto;
+		overflow-y:auto;
+	}
+	tr:nth-child(even){background-color: #f2f2f2}
+				
+	
+
     th, td {
         border: 1px solid #ccc;
-        padding: 8px;
-        text-align: center;
+		white-space: nowrap;
+		text-align: left;
+		padding: 8px;
+		
     }
     button:not(#btn){
         padding: 10px 20px;
@@ -116,6 +130,7 @@
 		  'GRAD' 0,
 		  'opsz' 40
 		}
+	
 		.fa { margin-left: -12px;margin-right: 8px;}
 		 <!-- #save{width:80px;} -->
 			.cp{
@@ -123,6 +138,7 @@
 				padding: 20px;
 				border: 1px solid black;
 				width: 80%;
+				overflow:hidden;
 				}
 				
 				
@@ -139,10 +155,10 @@
 				  background: var(--first-color); 
 				} 
 				.mainbox{
-				  position:absolute;
+				   position:absolute;
 				  left:50%;
-				  top:60%;
-				  transform:translate(-50%,-50%);
+					margin-top:12%;
+				  transform:translate(-50%,-60%);
 				}
 				label{
 				  position:relative;
@@ -240,7 +256,7 @@
 				@media screen and (max-width: 400px){
 				body{
 					
-					<!-- flex-direction: column; -->
+					
 					text-align:left;
 					width:100%;
 					
@@ -322,30 +338,34 @@
 	<div id="edit"><br>
     <p>Invoice Number: #INV2024001</p>
     <p>Date: May 28, 2024</p>
+	<div class="container">
     <table id="myTable">
+	
         <tr>
             <th>Item</th>
-            <th>Quantity</th>
+            <th>Qty</th>
             <th>Price</th>
             <th>Total</th>
         </tr>
         <tr>
-            <td>Product A</td>
+            <td> A</td>
             <td>2</td>
             <td>$50</td>
             <td>$100</td>
         </tr>
         <tr>
-            <td>Product B</td>
+            <td> B</td>
             <td>1</td>
             <td>$75</td>
             <td>$75</td>
         </tr>
+		
     </table><br>
 	</div>
 	</div>
+	</div>
 	<div>
-    <!-- <button onclick="saveAsPDF()" class="gen">Generate PDF</button> -->
+    
 		
 				<div class="mainbox">
 			   <input type="checkbox"  id="check">
@@ -387,7 +407,7 @@
 	let edit=document.getElementById('edit');
 	let save=document.getElementById('save');
 	
-		body.addEventListener('selectstart',(e)=>{
+		invoiceTitle.addEventListener('selectstart',(e)=>{
 			e.preventDefault();
 		});
 	
@@ -438,7 +458,7 @@
                     
                 }, 2000);
 		
-		},4000);
+		},3000);
 	}
 	
 	
@@ -468,15 +488,29 @@
 		  const addButton = document.querySelector('#addButton');
 		  const removeButton = document.querySelector('#removeButton');	
 
-		  function addRow() {
-			const newRow = document.createElement('tr');
-			for (let i = 1; i <= 4; i++) { // Adding 3 cells to the new row
-			  const newCell = document.createElement('td');
-			  newCell.textContent = i.length;
-			  newRow.appendChild(newCell);
+		  
+		 
+		
+			
+		function addRow() {
+			const rowCount = prompt("Enter the number of rows to add:");
+			
+			if (rowCount) {
+				const table = document.getElementById('myTable');
+				const columnCount = table.rows[0].cells.length;
+
+				for (let r = 0; r < rowCount; r++) {
+					const newRow = document.createElement('tr');
+					for (let i = 1; i <= columnCount; i++) {
+						const newCell = document.createElement('td');
+					
+						newRow.appendChild(newCell);
+					}
+					table.appendChild(newRow);
+				}
 			}
-			myTable.appendChild(newRow);
-		  }
+		}
+
 
 		  function removeRow() {
 			const rows = myTable.getElementsByTagName('tr');
@@ -516,6 +550,10 @@ function addColumn() {
 		  removeButton.addEventListener('click', removeRow);
 		  addColumnButton.addEventListener('click', addColumn);
 		  removeColumnButton.addEventListener('click', removeColumn);
+	
+		
+		
+		
 		
 		function data(){
 		 var tableData = [];
